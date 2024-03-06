@@ -35,13 +35,13 @@ export function Card({
       <div className="text-center">
         <p className="text-base text-zinc-500">{description}</p>
         {!tools && (
-          <div className="mt-5 text-center flex flex-col">
+          <div className="mt-5 text-center flex flex-col gap-2">
             <h3 className="text-xl font-bold text-green-500">Languages</h3>
             <p className="text-base text-zinc-100">{languages}</p>
           </div>
         )}
       </div>
-      <footer className="mt-5 text-center flex flex-col">
+      <footer className="mt-5 text-center flex flex-col gap-2">
         <h3 className="text-xl font-bold text-green-500">
           {tools ? "Tools" : "Tech’s"}
         </h3>
