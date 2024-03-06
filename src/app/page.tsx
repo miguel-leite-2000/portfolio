@@ -1,5 +1,31 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
 import { Navbar } from "@/components/navbar";
-import { Check, Code, Layers, Server } from "lucide-react";
+import {
+  Check,
+  Code,
+  Facebook,
+  Github,
+  Instagram,
+  Layers,
+  Linkedin,
+  Server,
+} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 
@@ -7,8 +33,40 @@ import PhotoMiguelLeite from "@/assets/miguelleite.png";
 import { Card } from "@/components/card";
 import { Divisor } from "@/components/divisor";
 import { UserIcon } from "@/components/icons";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
+
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: "name must be at least 2 characters.",
+  }),
+  email: z
+    .string()
+    .min(2, {
+      message: "name must be at least 2 characters.",
+    })
+    .email({
+      message: "email must be a valid email address.",
+    }),
+  message: z.string().min(2, {
+    message: "message must be at least 2 characters.",
+  }),
+});
 
 export default function Home() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-500">
       <header className="w-screen h-screen bg-hero py-16">
@@ -77,7 +135,7 @@ export default function Home() {
         />
         <Card
           icon={Server}
-          title="Back-end"
+          title="Back-End"
           description="I also like to work with some backend technologies."
           languages="JavaScript, TypeScript, PHP, Python"
           techs="Nodejs, Nestjs, GraphQL, Apollo Client, Expressjs, Laravel, Codeigniter, Django, Flask, MVC, API Rest, API GraphQL..."
@@ -169,6 +227,169 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="container my-28">
+        <div className="grid grid-cols-2 gap-7">
+          <div className="flex flex-col gap-3 p-8 rounded-md bg-gradient-to-b from-zinc-900 border border-zinc-900 transition hover:border-green-600 hover:shadow-green-600/15 hover:shadow-2xl">
+            <h3 className="text-4xl font-bold text-green-600">
+              Font-end Works
+            </h3>
+            <p className="text-xl">
+              Open source projects, web <br /> apps and experimentals.
+            </p>
+            <div className="mt-5">
+              <Button className="bg-transparent px-9 rounded-none border border-green-600 text-green-600 hover:bg-zinc-900">
+                See my works
+              </Button>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 p-8 rounded-md bg-gradient-to-b from-zinc-900 border border-zinc-900 transition hover:border-green-600 hover:shadow-green-600/15 hover:shadow-2xl">
+            <h3 className="text-4xl font-bold text-green-600">
+              Back-end Works
+            </h3>
+            <p className="text-xl">
+              Open source projects, web <br /> apps and experimentals.
+            </p>
+            <div className="mt-5">
+              <Button className="bg-transparent px-9 rounded-none border border-green-600 text-green-600 hover:bg-zinc-900">
+                See my works
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <Divisor />
+
+      <section className="container flex justify-center items-center mt-28 pb-28">
+        <div className="max-w-[45.313rem] w-full">
+          <div className="text-center mb-10">
+            <h2 className="text-5xl text-green-500 font-bold">Send message</h2>
+            <p className="text-base text-zinc-500 mt-4">
+              Got a question or proposal, or just want to say hello? Go ahead.
+            </p>
+          </div>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-5 w-full"
+            >
+              <div className="grid grid-cols-2 gap-5">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your name</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-700 text-zinc-300 focus:border-green-700"
+                          placeholder="Enter your name"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your e-mail</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-700 text-zinc-300 focus:border-green-700"
+                          placeholder="Enter your email address"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your message</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        rows={5}
+                        className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-700 text-zinc-300 focus:border-green-700 resize-none"
+                        placeholder="Type your message here."
+                        defaultValue="Hello, we need a Software developer to work with us, able to meet the demands of our company. Are Miguel Leite available?"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <center>
+                <Button
+                  type="submit"
+                  className="text-center w-96 bg-green-600 text-white hover:bg-green-800"
+                >
+                  Shoot
+                </Button>
+              </center>
+            </form>
+          </Form>
+        </div>
+      </section>
+
+      <footer className="pt-20 bg-gradient-to-t from-zinc-900 border-t border-zinc-900">
+        <div className="container flex items-center justify-between">
+          <div className="space-y-10">
+            <div className="flex items-center gap-3">
+              <Image
+                src={PhotoMiguelLeite}
+                className="rounded-full w-10 border border-green-600"
+                alt="Photo Miguel Leite"
+              />
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-zinc-100">
+                  Miguel Leite
+                </h3>
+                <p className="text-xs text-zinc-500">
+                  Software Developer - miguelleite2000leite@gmail.com
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-4 gap-3 text-zinc-400">
+              <Link href="#">Home</Link>
+              <Link href="#">My Self</Link>
+              <Link href="#">My Projects</Link>
+              <Link href="#">My Resume</Link>
+              <Link href="#">Say hello</Link>
+            </div>
+          </div>
+          <div className="flex items-center justify-end gap-5">
+            <Button className="bg-zinc-800 border border-zinc-700 text-zinc-300 px-4 py-4">
+              <Instagram size={16} />
+            </Button>
+            <Button className="bg-zinc-800 border border-zinc-700 text-zinc-300 px-4 py-4">
+              <Facebook size={16} />
+            </Button>
+            <Button className="bg-zinc-800 border border-zinc-700 text-zinc-300 px-4 py-4">
+              <Linkedin size={16} />
+            </Button>
+            <Button className="bg-zinc-800 border border-zinc-700 text-zinc-300 px-4 py-4">
+              <Github size={16} />
+            </Button>
+          </div>
+        </div>
+        <div className="py-10 bg-zinc-950 mt-20 bg-gradient-to-t from-zinc-900">
+          <div className="container">
+            <p className="text-base text-zinc-500">
+              Copyright © 2024. Miguel Leite. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }

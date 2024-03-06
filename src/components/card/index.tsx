@@ -21,7 +21,7 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className="py-16 px-10 bg-zinc-900 border border-zinc-800 rounded-lg flex flex-col items-center justify-center gap-5"
+      className="py-10 px-5 bg-zinc-900 border border-zinc-800 rounded-lg flex flex-col items-center justify-center gap-5"
       {...rest}
     >
       <header className="flex flex-col items-center gap-4">
