@@ -3,18 +3,26 @@ import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FolderGit2, GitFork, Star } from "lucide-react";
 
-export function Project() {
+type ProjectProps = {
+  title: string;
+  description: string;
+  url: string;
+  stars: number;
+  forks: number;
+};
+
+export function Project({
+  description,
+  title,
+  url,
+  forks,
+  stars,
+}: ProjectProps) {
   return (
-    <Link href="#">
+    <Link href={url}>
       <div className="bg-project h-[153px] bg-cover bg-center rounded-lg p-5">
-        <h2 className="font-bold text-white text-lg mb-2 text-wrap">
-          react-drag-drop-upload
-        </h2>
-        <p className="text-xs xl:text-[10px] text-zinc-300">
-          React Drag Drop Upload is a lightweight library for uploading files
-          and images with drag and drop, styled with Tailwind CSS and supporting
-          customization...
-        </p>
+        <h2 className="font-bold text-white text-lg mb-2 text-wrap">{title}</h2>
+        <p className="text-xs xl:text-[10px] text-zinc-300">{description}</p>
       </div>
       <div className="mt-3.5 flex items-center justify-between">
         <div className="flex items-center gap-1.5">
@@ -42,11 +50,11 @@ export function Project() {
           </span>
           <span className="flex items-center gap-2">
             <Star size={16} />
-            <span className="text-xs xl:text-[10px]">12</span>
+            <span className="text-xs xl:text-[10px]">{stars}</span>
           </span>
           <span className="flex items-center gap-2">
             <GitFork size={16} />
-            <span className="text-xs xl:text-[10px]">5</span>
+            <span className="text-xs xl:text-[10px]">{forks}</span>
           </span>
         </div>
       </div>

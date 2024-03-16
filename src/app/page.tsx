@@ -32,7 +32,7 @@ export default function Home() {
         <Sidebar />
 
         <main className="w-full max-h-[725px]">
-          <header className="flex items-center justify-between">
+          <header className="max-lg:flex items-center justify-between">
             <Button className="text-zinc-100 lg:hidden bg-transparent px-0 hover:bg-transparent focus:bg-transparent">
               <Menu size={24} />
             </Button>
@@ -75,17 +75,15 @@ export default function Home() {
 
           <section className="my-9 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 lg:gap-8 xl:gap-x-14 gap-y-6 relative">
             <div className="h-32 w-full bg-gradient-to-t from-neutral-950 fixed bottom-0 left-0 right-0 z-50 mt-5" />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
-            <Project />
+            <Project
+              title="react-drag-drop-upload"
+              description=" React Drag Drop Upload is a lightweight library for uploading files
+          and images with drag and drop, styled with Tailwind CSS and supporting
+          customization..."
+              url="/project"
+              stars={12}
+              forks={5}
+            />
           </section>
         </main>
       </section>
