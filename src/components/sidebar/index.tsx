@@ -2,7 +2,7 @@ import { Database, Figma, LayoutGrid, TabletSmartphone } from "lucide-react";
 
 export function Sidebar() {
   return (
-    <aside className="max-w-[278px] w-full">
+    <aside className="max-w-[278px] max-lg:hidden w-full">
       <ul className="flex flex-col gap-4">
         <li className="flex items-center justify-between p-2.5 rounded-[6px] cursor-pointer text-green-500 bg-green-500/20">
           <div className="flex items-center gap-2.5">
